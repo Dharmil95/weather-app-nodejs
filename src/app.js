@@ -41,7 +41,6 @@ app.get('/help',(req,res) => {
 })
 
 app.get('/weather', (req,res) => {
-    console.log(req.query.search+'here3')
     if (!req.query.place) {
         return res.send({
             error: 'You must provide search parameter.'
@@ -54,16 +53,13 @@ app.get('/weather', (req,res) => {
                 error
             })
         }
-        console.log(longitude,latitude,location+'here')
         forecast(latitude,longitude,(error,data) => {
             if (error) {
                 return res.send({
                     error
                 })
             }
-            console.log(data+'here2')
             forecast_str = data.summary+' It is currently '+data.temperature+' degrees out. There is a ' + data.precipProbability + '% chance of rain.' 
-            console.log(forecast_str)
             res.send({
                 forecast: forecast_str,
                 //forecast: data.temperature,
@@ -74,7 +70,6 @@ app.get('/weather', (req,res) => {
 })
 
 app.get('/products',(req,res) => {
-    console.log(req.query)
     res.send({
         products:[]
     })
